@@ -33,10 +33,10 @@ require('dotenv').config({
 
 // TODO: Replace these values with your own
 
-const BUNDLE_ID = 'com.litebook'; // ios bundle id
-const PACKAGE = 'com.litebook'; // android package name
+const BUNDLE_ID = 'com.bishalneupane.litebook'; // ios bundle id
+const PACKAGE = 'com.bishalneupane.litebook'; // android package name
 const NAME = 'litebook'; // app name
-const EXPO_ACCOUNT_OWNER = 'expo-owner'; // expo account owner
+const EXPO_ACCOUNT_OWNER = 'bishaln'; // expo account owner
 const EAS_PROJECT_ID = 'c3e1075b-6fe7-4686-aa49-35b46a229044'; // eas project id
 const SCHEME = 'litebook'; // app scheme
 
