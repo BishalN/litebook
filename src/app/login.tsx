@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+// import auth from '@react-native-firebase/auth';
 import React from 'react';
 
 import type { LoginFormProps } from '@/components/login-form';
@@ -8,14 +8,18 @@ import { useSoftKeyboardEffect } from '@/core/keyboard';
 import { FocusAwareStatusBar } from '@/ui';
 
 export default function Login() {
-  const router = useRouter();
   const signIn = useAuth.use.signIn();
   useSoftKeyboardEffect();
 
-  const onSubmit: LoginFormProps['onSubmit'] = (data) => {
+  const onSubmit: LoginFormProps['onSubmit'] = async (data) => {
     console.log(data);
+    // const res = await auth().createUserWithEmailAndPassword(
+    //   data.email,
+    //   data.password
+    // );
+    // console.log(res);
     signIn({ access: 'access-token', refresh: 'refresh-token' });
-    router.push('/');
+    // router.push('/');
   };
   return (
     <>

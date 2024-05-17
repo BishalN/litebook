@@ -9,7 +9,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   description: `${Env.NAME} Mobile App`,
   owner: Env.EXPO_ACCOUNT_OWNER,
   scheme: Env.SCHEME,
-  slug: 'obytesapp',
+  slug: 'litebook',
   version: Env.VERSION.toString(),
   orientation: 'portrait',
   icon: './assets/icon.png',
@@ -53,17 +53,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     'expo-localization',
     'expo-router',
     [
-      'expo-build-properties',
-      {
-        android: {
-          kotlinVersion: '1.7.22', // this is for softinput package
-        },
-        ios: {
-          useFrameworks: 'static', // for firebase
-        },
-      },
-    ],
-    [
       'app-icon-badge',
       {
         enabled: Env.APP_ENV !== 'production',
@@ -79,6 +68,17 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             color: 'white',
           },
         ],
+      },
+    ],
+    [
+      'expo-build-properties',
+      {
+        ios: {
+          useFrameworks: 'static', // for firebase
+        },
+        android: {
+          kotlinVersion: '1.7.22', // this is for softinput package
+        },
       },
     ],
   ],

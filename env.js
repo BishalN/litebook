@@ -47,6 +47,7 @@ const SCHEME = 'litebook'; // app scheme
  * @returns  {string}
  */
 
+// TODO: uncomment this for proper usage since i want to just have a single bundle id and package name
 const withEnvSuffix = (name) => {
   return APP_ENV === 'production' ? name : `${name}.${APP_ENV}`;
 };
@@ -97,8 +98,11 @@ const _clientEnv = {
   APP_ENV,
   NAME: NAME,
   SCHEME: SCHEME,
-  BUNDLE_ID: withEnvSuffix(BUNDLE_ID),
-  PACKAGE: withEnvSuffix(PACKAGE),
+  // TODO: uncomment this for proper usage since i want to just have a single bundle id and package name
+  // BUNDLE_ID: withEnvSuffix(BUNDLE_ID),
+  // PACKAGE: withEnvSuffix(PACKAGE),
+  BUNDLE_ID: BUNDLE_ID,
+  PACKAGE: PACKAGE,
   VERSION: packageJSON.version,
 
   // ADD YOUR ENV VARS HERE TOO
