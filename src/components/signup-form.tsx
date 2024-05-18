@@ -30,15 +30,17 @@ const schema = z
     return data;
   });
 
-export type FormType = z.infer<typeof schema>;
+export type SignupFormType = z.infer<typeof schema>;
 
 export type SignupFormProps = {
-  onSubmit?: SubmitHandler<FormType>;
+  onSubmit?: SubmitHandler<SignupFormType>;
 };
 
+// TODO: Handle error and make submit from within this component
+// use toast to show error
 export const SignupForm = ({ onSubmit = () => {} }: SignupFormProps) => {
   const [isEmail, setIsEmail] = React.useState(false);
-  const { handleSubmit, control } = useForm<FormType>({
+  const { handleSubmit, control } = useForm<SignupFormType>({
     resolver: zodResolver(schema),
   });
   return (

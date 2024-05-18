@@ -1,8 +1,12 @@
-import auth from '@react-native-firebase/auth';
 import { useRouter } from 'expo-router';
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth';
 import React from 'react';
-import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 
+import { auth } from '@/api/firebase';
 import type { SignupFormProps } from '@/components/signup-form';
 import { SignupForm } from '@/components/signup-form';
 import { signIn } from '@/core';
@@ -23,18 +27,28 @@ export default function SignUp() {
     if (data.email) {
       // create user with email and password firebase
       try {
-        const response = await auth().createUserWithEmailAndPassword(
+        const response = await createUserWithEmailAndPassword(
+          auth,
           data.email,
           data.password
         );
-        console.log(response);
         if (response.user) {
-          await response.user.sendEmailVerification();
+          await sendEmailVerification(response.user);
+
+          Toast.show({
+            type: 'success',
+            text1: 'User created successfully',
+            text2: 'Please verify your email',
+          });
+
           router.push('/verify-email');
         }
       } catch (error) {
         console.error(error);
-        Alert.alert('Error');
+        Toast.show({
+          type: 'error',
+          text1: error?.message ?? "Couldn't create user",
+        });
       }
     } else if (data.phone) {
       // create user with phone and password firebase

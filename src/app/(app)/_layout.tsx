@@ -27,9 +27,10 @@ export default function TabLayout() {
   if (isFirstTime) {
     return <Redirect href="/onboarding" />;
   }
-  if (status === 'signOut') {
-    return <Redirect href="/login" />;
-  }
+  // TODO: use firebase style auth instead
+  // if (status === 'signOut') {
+  //   return <Redirect href="/login" />;
+  // }
   return (
     <Tabs>
       <Tabs.Screen

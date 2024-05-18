@@ -6,6 +6,7 @@ import { SplashScreen, Stack, useNavigationContainerRef } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Toast from 'react-native-toast-message';
 
 import { APIProvider } from '@/api';
 import { hydrateAuth, loadSelectedTheme } from '@/core';
@@ -56,6 +57,7 @@ function Providers({ children }: { children: React.ReactNode }) {
             {children}
             <FlashMessage position="top" />
           </BottomSheetModalProvider>
+          <Toast />
         </APIProvider>
       </ThemeProvider>
     </GestureHandlerRootView>

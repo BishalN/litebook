@@ -26,7 +26,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: Env.BUNDLE_ID,
-    googleServicesFile: './GoogleService-Info.plist',
   },
   experiments: {
     typedRoutes: true,
@@ -37,7 +36,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       backgroundColor: '#2E3C4B',
     },
     package: Env.PACKAGE,
-    googleServicesFile: './google-services.json',
   },
   web: {
     favicon: './assets/favicon.png',
@@ -73,9 +71,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-build-properties',
       {
-        ios: {
-          useFrameworks: 'static', // for firebase
-        },
         android: {
           kotlinVersion: '1.7.22', // this is for softinput package
         },

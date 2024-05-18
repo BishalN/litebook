@@ -1,9 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'expo-router';
+import { applyActionCode } from 'firebase/auth';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Toast from 'react-native-toast-message';
 import { z } from 'zod';
 
+import { auth } from '@/api/firebase';
 import { Button, ControlledInput, Text, View } from '@/ui';
 
 const schema = z.object({
@@ -21,8 +24,18 @@ function VerifyEmail() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: FormType) => {
+  const onSubmit = async (data: FormType) => {
+    // send code to server
     console.log(data);
+    try {
+      await applyActionCode(auth, data.code);
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: error?.message ?? "Couldn't verify email",
+      });
+      console.error(error);
+    }
   };
 
   return (

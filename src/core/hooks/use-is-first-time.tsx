@@ -11,3 +11,15 @@ export const useIsFirstTime = () => {
   }
   return [isFirstTime, setIsFirstTime] as const;
 };
+
+// useAsyncstorage.tsx
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const useAsyncStorage = async () => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (e) {
+    console.error(e);
+  }
+};

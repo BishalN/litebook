@@ -1,10 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
-import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { auth } from '@/api/firebase';
 import { Button, ControlledInput, Text, View } from '@/ui';
 
 const schema = z.object({
@@ -22,14 +23,25 @@ const schema = z.object({
 
 export type FormType = z.infer<typeof schema>;
 
-export type LoginFormProps = {
-  onSubmit?: SubmitHandler<FormType>;
-};
-
-export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
+export const LoginForm = () => {
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(schema),
   });
+  const [isloading, setIsLoading] = React.useState(false);
+
+  const onSubmit = async (data: FormType) => {
+    setIsLoading(true);
+    const res = await signInWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
+    setIsLoading(false);
+    if (res.user) {
+      console.log(res.user);
+      router.push('/');
+    }
+  };
   return (
     <View className="flex-1 justify-center p-4">
       <Text className=" text-center text-2xl">Litebook</Text>
@@ -53,6 +65,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
       <Button
         testID="login-button"
         label="Login"
+        loading={isloading}
         onPress={handleSubmit(onSubmit)}
       />
 
